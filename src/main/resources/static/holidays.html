@@ -1,0 +1,30 @@
+<html>
+<head>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <title>hello sheros</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.mobile.css" media="all">
+</head>
+<body>
+<div class="container"><br/>
+    <form class="layui-form" action="/user/checkHoliday">
+        <div class="layui-form-item">
+            输入微信号(不是微信昵称)查看您的假期:
+            <div class="layui-input-block">
+                <input type="text" name="wxAccount" autocomplete="off" placeholder="请输入微信号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

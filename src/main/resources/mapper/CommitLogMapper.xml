@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyr.xdeveloper.mapper.CommitLogMapper">
+    <resultMap id="userMap" type="com.tyr.xdeveloper.common.model.CommitLog">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="settle_day" property="settleDay"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, settle_day
+    </sql>
+
+    <insert id="insertBatch" parameterType="commitLog">
+        insert into t_commit_log
+            (user_id ,settle_day)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId}, #{item.settleDay})
+        </foreach>
+    </insert>
+    <select id="statCommitDay" resultType="com.tyr.xdeveloper.common.model.SettleStat">
+        select
+        count(*) commitDayNum, user_id userId
+        from t_commit_log
+        where
+        settle_day >= #{startDay}
+        and settle_day  <![CDATA[ <= ]]> #{endDay}
+        and user_id in
+        <foreach collection="userIdList" open="(" close=")" item="userId" separator=",">
+            #{userId}
+        </foreach>
+        group by user_id
+    </select>
+
+</mapper>

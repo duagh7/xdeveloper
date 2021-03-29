@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyr.xdeveloper.mapper.AbsentSettleMapper">
+    <resultMap id="userMap" type="com.tyr.xdeveloper.common.model.AbsentSettle">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="absent_str" jdbcType="VARCHAR" property="absentStr"/>
+        <result column="settle_day" jdbcType="DATE" property="settleDay"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, absent_str, settle_day, create_time, update_time
+    </sql>
+    <insert id="insertAbsentSettle">
+        insert into t_absent_settle
+        (absent_str,settle_day)
+        values (#{absentStr},#{settleDay})
+    </insert>
+    <select id="getByTime" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_absent_settle
+        where settle_day >= #{startDate} and settle_day <![CDATA[ < ]]> #{endDate}
+    </select>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyr.xdeveloper.mapper.UserMapper">
+    <resultMap id="userMap" type="com.tyr.xdeveloper.common.model.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="wx_account" jdbcType="VARCHAR" property="wxAccount"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="commit_day_num" property="commitDayNum"/>
+        <result column="absent_day_num" property="absentDayNum"/>
+        <result column="holiday_num" property="holidayNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, wx_account, nick_name, commit_day_num, absent_day_num, holiday_num,
+        create_time, update_time, status
+    </sql>
+
+    <select id="getUserById" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_user where id = #{id}
+    </select>
+
+    <select id="selectByWxAccount" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_user where wx_account = #{wxAccount}
+    </select>
+
+    <select id="getUserList" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_user
+    </select>
+    <select id="selectByNickName" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_user where
+        nick_name like concat('%',#{nickName},'%')
+        or #{nickName} like concat('%',nick_name,'%')
+    </select>
+    <select id="selectByUserIdList" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_user where
+        id in
+        <foreach collection="userIdList" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </select>
+    <select id="selectByNickNameList" resultMap="userMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from t_user where
+        nick_name in
+        <foreach collection="nameList" item="name" open="(" close=")" separator=",">
+            #{name}
+        </foreach>
+    </select>
+
+    <update id="updateNickNameById" parameterType="com.tyr.xdeveloper.common.model.User">
+        update t_user
+        <set>
+            <if test="nickName != null">
+                nick_name = #{nickName}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateHolidayNum" parameterType="user">
+        update t_user
+        <set>
+            <if test="holidayNum != null">
+                holiday_num = holiday_num + #{holidayNum}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="addUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user
+        (nick_name,wx_account)
+        value
+        (#{nickName},#{wxAccount})
+    </insert>
+
+</mapper>

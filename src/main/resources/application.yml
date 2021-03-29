@@ -1,0 +1,18 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    username: username
+    password: password
+    url: jdbc:mysql://host:port/xdeveloper?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.tyr.xdeveloper.common.model
+
+  #showSql
+logging:
+  level:
+    com.tyr.xdeveloper.mapper: debug

@@ -1,0 +1,52 @@
+<html>
+<head>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <title>hello sheros</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.mobile.css"  media="all">
+</head>
+<body>
+<div class="container"><br/>
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        群规：<br/>
+        每日<strong>（国内2am前,美西10am前）</strong>打卡，一句话描述今日所学的<strong>技术内容</strong><br/>
+        每周会发放1天假期，可累积，假期用尽且未打卡则移出群聊，<strong>请假不要接龙</strong><br/>
+    </div>
+<!--    <div class="alert alert-success">-->
+<!--        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
+<!--        群资料《sheros资料汇总》:<br/>-->
+<!--        https://shimo.im/docs/ptjjc38x6vRtP9Q9/-->
+<!--    </div>-->
+    <form class="layui-form" action="/user/collectName">
+        <div class="layui-form-item">
+            微信号:（注意不是微信昵称，是微信号)
+            <div class="layui-input-block">
+                <input type="text" name="wxAccount" lay-verify="title" autocomplete="off" placeholder="请输入微信号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+<!--            <label class="layui-form-label">-->
+                打卡昵称:<br/>
+                (说明：打卡昵称需要有一定辨识度，2个汉字或4个英文字母以上;<br/>
+                <strong>日后打卡时都用这个昵称打卡</strong><br/>
+                <strong>建议和群昵称统一</strong>，因为群接龙打卡时会自动填写群昵称。）<br/>
+<!--            </label>-->
+            <div class="layui-input-block">
+                <input type="text" name="nickName" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入打卡昵称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
